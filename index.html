@@ -15,7 +15,7 @@
 <a href="hotels.html">Hotels</a>
 <a href="about.html">About Us</a>
 <a href="contact.html">Contact</a>
-<a class="btn" href="booking.html">Login</a>
+<a class="btn" href="booking.html">Book Now</a>
 </nav>
 </header>
 <main>
@@ -24,37 +24,25 @@
 <p>Search and book comfortable hotels anywhere in the world.</p>
 </section>
 
-<form class="search-box" action="hotels.html">
-<div class="field"><label>Destination</label><input type="text" placeholder="Enter a city"></div>
-<div class="field"><label>Check-in</label><input type="date"></div>
-<div class="field"><label>Check-out</label><input type="date"></div>
-<div class="field"><label>Guests</label><input type="text" value="2 adults"></div>
+<form class="search-box" id="home-search" action="hotels.html">
+<div class="field"><label for="home-destination">Destination</label><input id="home-destination" type="text" placeholder="Enter a city"></div>
+<div class="field"><label for="home-checkin">Check-in</label><input id="home-checkin" type="date"></div>
+<div class="field"><label for="home-checkout">Check-out</label><input id="home-checkout" type="date"></div>
+<div class="field"><label for="home-guests">Guests</label><input id="home-guests" type="text" value="2 adults"></div>
 <button class="dark" type="submit">Search</button>
 </form>
 
 <h2 class="section-title">Popular Hotels</h2>
-<div class="hotel-grid">
-<article class="hotel-card">
-<div class="image-placeholder"></div>
-<h3>The Veil Hotel</h3><div class="stars">★★★★★</div>
-<div class="muted">Astana, Kazakhstan</div><div class="price">$360 / night</div>
-<div class="card-actions"><a class="btn" href="hotel-details.html">View Hotel</a></div>
-</article>
-<article class="hotel-card">
-<div class="image-placeholder"></div>
-<h3>Shеraton</h3><div class="stars">★★★★★</div>
-<div class="muted">Astana, Kazakhstan</div><div class="price">$288 / night</div>
-<div class="card-actions"><a class="btn" href="hotel-details.html">View Hotel</a></div>
-</article>
-<article class="hotel-card">
-<div class="image-placeholder"></div>
-<h3>Wyndham</h3><div class="stars">★★★★★</div>
-<div class="muted">Astana, Kazakhstan</div><div class="price">$180 / night</div>
-<div class="card-actions"><a class="btn" href="hotel-details.html">View Hotel</a></div>
-</article>
-</div>
+<div class="hotel-grid" id="popular-hotels"></div>
 </main>
-<footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span>© 2026 HotelBook. All rights reserved.</span></footer>
+<footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span><a href="sitemap.html">Sitemap</a> | <a href="project-description.html">Project Description</a></span><span>© 2026 HotelBook. All rights reserved.</span></footer>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+<script src="js/effects.js"></script>
 </body>
 </html>
