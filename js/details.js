@@ -1,0 +1,1 @@
+// Hotel details page: render by id, tabs, gallery. Owner: Participant 2.
