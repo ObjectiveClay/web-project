@@ -72,3 +72,50 @@ function renderHotels(hotelsToShow, container, layout) {
     });
     updateFavoriteButtons();
 }
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function showFieldError(input, message) {
+    const error = input.closest(".field").querySelector(".error-message");
+    input.classList.add("invalid");
+    input.setAttribute("aria-invalid", "true");
+    error.textContent = message;
+}
+
+function clearFieldError(input) {
+    const error = input.closest(".field").querySelector(".error-message");
+    input.classList.remove("invalid");
+    input.setAttribute("aria-invalid", "false");
+    error.textContent = "";
+}
+
+function validateField(input, getError) {
+    const message = getError(input);
+    if (message !== "") {
+        showFieldError(input, message);
+        return false;
+    }
+    clearFieldError(input);
+    return true;
+}
+
+function validateForm(form, getError) {
+    let isValid = true;
+    let firstInvalid = null;
+
+    for (const input of form.querySelectorAll("input, select, textarea")) {
+        if (!validateField(input, getError)) {
+            isValid = false;
+            if (firstInvalid === null) {
+                firstInvalid = input;
+            }
+        }
+    }
+
+    if (firstInvalid) {
+        firstInvalid.focus();
+    }
+    return isValid;
+}

@@ -5,14 +5,56 @@
 <main>
 <section class="hero"><h1>Contact Us</h1><p>We'd love to hear from you.</p></section>
 <div class="contact-layout">
-<form class="form-panel"><h3>Send Us a Message</h3>
-<div class="field"><label>Name</label><input placeholder="Enter your name"></div>
-<div class="field"><label>Email</label><input type="email" placeholder="Enter your email"></div>
-<div class="field"><label>Message</label><textarea placeholder="Write your message here..."></textarea></div>
+<form class="form-panel" id="contact-form" novalidate><h3>Send Us a Message</h3>
+
+<div class="field"><label for="contact-name">Name</label>
+<input id="contact-name" type="text" placeholder="Enter your name" autocomplete="name" aria-describedby="contact-name-error">
+<small class="error-message" id="contact-name-error"></small></div>
+
+<div class="field"><label for="contact-email">Email</label>
+<input id="contact-email" type="email" placeholder="Enter your email" autocomplete="email" aria-describedby="contact-email-error">
+<small class="error-message" id="contact-email-error"></small></div>
+
+<div class="field"><label for="contact-topic">Topic</label>
+<select id="contact-topic" aria-describedby="contact-topic-error">
+<option value="">Choose a topic</option>
+<option value="booking">Booking question</option>
+<option value="payment">Payment</option>
+<option value="feedback">Feedback</option>
+<option value="other">Other</option>
+</select>
+<small class="error-message" id="contact-topic-error"></small></div>
+
+<div class="field"><label for="contact-message">Message</label>
+<textarea id="contact-message" placeholder="Write your message here..." aria-describedby="contact-message-error message-counter"></textarea>
+<small class="char-counter" id="message-counter">0 / 500</small>
+<small class="error-message" id="contact-message-error"></small></div>
+
 <button class="dark" type="submit">Send Message</button>
+<p class="success-message hidden" id="contact-success" role="status"></p>
 </form>
 <aside class="panel"><h3>Contact Information</h3><p><strong>Address</strong><br>Astana, Kazakhstan</p><p><strong>Phone</strong><br>+7 700 667 5637</p><p><strong>Email</strong><br>info@hotelbook.com</p><p><strong>Working Hours</strong><br>Mon - Sun, 9:00 - 18:00</p><div class="image-placeholder">MAP LOCATION</div></aside>
 </div>
+
+<section class="faq" id="faq">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-item">
+<button class="faq-question" type="button" aria-expanded="false">How can I change or cancel my booking?</button>
+<div class="faq-answer"><p>Write to us using the form above or call our support. Please include your name and booking dates.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question" type="button" aria-expanded="false">Is breakfast included in the price?</button>
+<div class="faq-answer"><p>It depends on the hotel. Open the hotel page and check the Amenities tab.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question" type="button" aria-expanded="false">Do I pay now or at the hotel?</button>
+<div class="faq-answer"><p>HotelBook only reserves the room. Payment is made at the hotel on arrival.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-question" type="button" aria-expanded="false">How many guests can stay in one room?</button>
+<div class="faq-answer"><p>You can book for 1 to 6 guests. For larger groups, please contact us.</p></div>
+</div>
+</section>
 </main>
 <footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span><a href="sitemap.html">Sitemap</a> | <a href="project-description.html">Project Description</a></span><span>© 2026 HotelBook. All rights reserved.</span></footer>
 </div>

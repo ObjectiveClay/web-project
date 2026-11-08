@@ -720,3 +720,144 @@ footer a {
     border-color: var(--border);
     color: var(--text);
 }
+
+.error-message {
+    color: #c0392b;
+    font-size: 12px;
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 1px #c0392b;
+}
+
+.success-message {
+    border: 1px solid #2e7d32;
+    background: #eef8ef;
+    color: #1e5e22;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 12px 0 0;
+}
+
+.char-counter {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+}
+
+.char-counter.over-limit {
+    color: #c0392b;
+    font-weight: 700;
+}
+
+.faq {
+    margin-top: 28px;
+}
+
+.faq h2 {
+    font-size: 22px;
+    margin: 0 0 12px;
+}
+
+.faq-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 12px 14px;
+}
+
+.faq-question::after {
+    content: "+";
+    font-size: 18px;
+}
+
+.faq-item.open .faq-question::after {
+    content: "−";
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 14px 12px;
+}
+
+.faq-answer p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.active-link {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        padding: 8px 0;
+    }
+
+    nav .btn,
+    nav .theme-toggle {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+        text-align: center;
+    }
+}
+
+[data-theme="dark"] .error-message,
+[data-theme="dark"] .char-counter.over-limit {
+    color: #ff8a80;
+}
+
+[data-theme="dark"] input.invalid,
+[data-theme="dark"] select.invalid,
+[data-theme="dark"] textarea.invalid {
+    border-color: #ff8a80;
+    box-shadow: 0 0 0 1px #ff8a80;
+}
+
+[data-theme="dark"] .success-message {
+    background: #1f3322;
+    border-color: #4caf50;
+    color: #a5d6a7;
+}
+
+[data-theme="dark"] .faq-question {
+    border: 0;
+    background: transparent;
+}
