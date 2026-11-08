@@ -70,4 +70,5 @@ function renderHotels(hotelsToShow, container, layout) {
     hotelsToShow.forEach((hotel) => {
         container.appendChild(createHotelCard(hotel, layout));
     });
+    updateFavoriteButtons();
 }

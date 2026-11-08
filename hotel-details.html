@@ -4,20 +4,42 @@
 <header><a class="logo" href="index.html">HotelBook</a><nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav></header>
 <main>
 <p><a href="hotels.html">← Back to results</a></p>
-<h1 class="page-title">The Veil Hotel</h1><p>★ ★ ★ ★ ★ 4.8 (324 reviews)</p><p class="muted">Astana, Kazakhstan</p>
+
+<p class="empty-message hidden" id="hotel-not-found">Hotel not found. Please go back to the hotel list.</p>
+
+<div id="hotel-content">
+<h1 class="page-title" id="hotel-name">Hotel</h1>
+<p id="hotel-rating"></p>
+<p class="muted" id="hotel-location"></p>
+
 <div class="details-grid">
 <section>
-<div class="image-placeholder big-image"></div>
-<div class="gallery"><div class="image-placeholder"></div><div class="image-placeholder"></div><div class="image-placeholder"></div></div>
-<div class="features"><p class="muted">Overview &nbsp; Rooms &nbsp; Amenities &nbsp; Reviews</p><h2>About this hotel</h2><p>A modern boutique hotel offering cozy accommodation in the capital.</p></div>
+<img class="main-image" id="main-image" alt="">
+<div class="gallery" id="hotel-gallery"></div>
+
+<div class="features">
+<div class="tabs" id="hotel-tabs" role="tablist">
+<button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+<button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="rooms">Rooms</button>
+<button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="amenities">Amenities</button>
+<button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="reviews">Reviews</button>
+</div>
+
+<div class="tab-panel" id="tab-overview"><h2>About this hotel</h2><p id="hotel-description"></p></div>
+<div class="tab-panel hidden" id="tab-rooms"><h2>Rooms</h2><div id="rooms-list"></div></div>
+<div class="tab-panel hidden" id="tab-amenities"><h2>Amenities</h2><ul id="amenities-list"></ul></div>
+<div class="tab-panel hidden" id="tab-reviews"><h2>Guest reviews</h2><div id="reviews-list"></div></div>
+</div>
 </section>
+
 <aside class="price-box">
-<div class="price">$360<small>/night</small></div>
-<a class="btn btn-dark" href="booking.html">Book Now</a>
-<ul>
-<li>Free Wi-Fi</li><li>Breakfast included</li><li>Free parking</li><li>Swimming pool</li><li>Fitness center</li><li>24/7 reception</li>
-</ul>
+<div class="price" id="hotel-price"></div>
+<div class="price-actions">
+<a class="btn btn-dark" id="book-link" href="booking.html">Book Now</a>
+<button class="favorite-btn" id="details-favorite" type="button">♡</button>
+</div>
 </aside>
+</div>
 </div>
 </main>
 <footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span><a href="sitemap.html">Sitemap</a> | <a href="project-description.html">Project Description</a></span><span>© 2026 HotelBook. All rights reserved.</span></footer>

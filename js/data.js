@@ -79,3 +79,18 @@ const hotels = [
         description: "A small family-run guesthouse close to the main sights."
     }
 ];
+
+const roomTypes = [
+    { name: "Standard Room", beds: "1 queen bed", priceFactor: 1 },
+    { name: "Deluxe Room", beds: "1 king bed", priceFactor: 1.4 },
+    { name: "Family Suite", beds: "2 queen beds", priceFactor: 1.8 }
+];
+
+const sampleReviews = [
+    { author: "Aigerim", stars: 5, text: "Very clean rooms and friendly staff." },
+    { author: "Daniyar", stars: 4, text: "Good location, but check-in took a while." },
+    { author: "Sofia", stars: 5, text: "Great breakfast and a comfortable bed." },
+    { author: "Marat", stars: 4, text: "Good value for the price. Would stay again." },
+    { author: "Elena", stars: 5, text: "Quiet room and helpful reception." },
+    { author: "Timur", stars: 3, text: "Fine for a short trip, the room was small." }
+];
