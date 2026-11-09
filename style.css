@@ -1,6 +1,3 @@
-/* =========================================================
-   HotelBook — монохромный (чёрно-белый) дизайн
-   ========================================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap");
 
@@ -66,7 +63,6 @@ h1, h2, h3 {
     flex-direction: column;
 }
 
-/* ---------- Header ---------- */
 
 header {
     position: sticky;
@@ -123,7 +119,6 @@ nav a.active-link::after {
     transform: scaleX(1);
 }
 
-/* ---------- Buttons ---------- */
 
 .btn,
 button {
@@ -174,7 +169,6 @@ nav .btn:hover {
     border-color: var(--border-strong);
 }
 
-/* ---------- Layout ---------- */
 
 main {
     padding: 36px 28px;
@@ -234,7 +228,6 @@ main {
     border-bottom: 1px solid var(--border);
 }
 
-/* ---------- Search box ---------- */
 
 .search-box {
     border: 1px solid var(--border);
@@ -256,7 +249,6 @@ main {
     padding: 0 28px;
 }
 
-/* ---------- Forms ---------- */
 
 .field {
     display: flex;
@@ -312,7 +304,6 @@ input[type="checkbox"] {
     margin: 0 6px 0 0;
 }
 
-/* ---------- Hotel cards ---------- */
 
 .section-title {
     font-family: "Playfair Display", Georgia, serif;
@@ -430,7 +421,6 @@ footer a:hover {
     color: var(--text);
 }
 
-/* ---------- Hotels page ---------- */
 
 .hotels-layout {
     display: grid;
@@ -533,7 +523,6 @@ aside.panel {
     width: auto;
 }
 
-/* ---------- Details page ---------- */
 
 .details-grid {
     display: grid;
@@ -698,7 +687,6 @@ aside.panel {
     margin: 6px 0 0;
 }
 
-/* ---------- Booking / Contact ---------- */
 
 .booking-layout,
 .contact-layout {
@@ -750,7 +738,6 @@ aside.panel {
     font-weight: 600;
 }
 
-/* ---------- About ---------- */
 
 .about-intro {
     display: grid;
@@ -791,7 +778,6 @@ aside.panel {
     margin-top: 0;
 }
 
-/* ---------- Sitemap ---------- */
 
 .sitemap {
     max-width: 760px;
@@ -857,7 +843,6 @@ aside.panel {
     line-height: 1.75;
 }
 
-/* ---------- Utilities / states ---------- */
 
 .hidden {
     display: none;
@@ -975,7 +960,6 @@ textarea.invalid {
     text-decoration: underline;
 }
 
-/* ---------- FAQ ---------- */
 
 .faq {
     margin-top: 36px;
@@ -1042,7 +1026,6 @@ textarea.invalid {
     display: none;
 }
 
-/* ---------- Dark theme (инверсия: чёрный фон, белый текст) ---------- */
 
 :root[data-theme="dark"] {
     color-scheme: dark;
@@ -1095,7 +1078,6 @@ textarea.invalid {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
     nav {
@@ -1226,7 +1208,6 @@ textarea.invalid {
 }
 
 
-/* ENDKA */
 .hidden {
     display: none;
 }
@@ -1349,7 +1330,6 @@ footer a {
     font-size: 12px;
 }
 
-/* Endterm: hotel details */
 .main-image {
     display: block;
     width: 100%;
@@ -1428,7 +1408,6 @@ footer a {
     margin: 6px 0 0;
 }
 
-/* Endterm: dark theme */
 :root[data-theme="dark"] {
     color-scheme: dark;
     --bg: #16181d;
