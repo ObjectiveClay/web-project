@@ -77,6 +77,7 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+//Participant: Abilmansur
 function showFieldError(input, message) {
     const error = input.closest(".field").querySelector(".error-message");
     input.classList.add("invalid");

@@ -1,4 +1,4 @@
-
+//Participant: Abilmansur
 $(function () {
     const $nav = $("header nav");
     const $menuButton = $("<button>", {
