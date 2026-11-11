@@ -1,3 +1,4 @@
+//Participant: Miras
 const amenities = [
     { id: "wifi", label: "Free Wi-Fi" },
     { id: "breakfast", label: "Breakfast" },

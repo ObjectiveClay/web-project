@@ -1,3 +1,4 @@
+//Participant: Miras
 function formatPrice(price) {
     return `$${price} / night`;
 }
