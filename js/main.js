@@ -1,15 +1,14 @@
-//Participant: Alikhan 
-const THEME_KEY = "hotelbook-theme";
-const FAVORITES_KEY = "hotelbook-favorites";
+const THEMES = ["light", "dark"];
 
 
 function getSavedTheme() {
-    return localStorage.getItem(THEME_KEY) || "light";
+    const theme = themeStorage.get();
+    return THEMES.includes(theme) ? theme : "light";
 }
 
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem(THEME_KEY, theme);
+    themeStorage.save(theme);
 }
 
 function getThemeButtonText(theme) {
@@ -33,15 +32,10 @@ function createThemeButton() {
     nav.appendChild(button);
 }
 
-/* Favorites */
-
-
 function getFavorites() {
-    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
-}
-
-function saveFavorites(favorites) {
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    return favoritesStorage.get()
+        .map(Number)
+        .filter((id) => findHotelById(id) !== null);
 }
 
 function isFavorite(id) {
@@ -59,7 +53,7 @@ function toggleFavorite(id) {
         favorites.splice(index, 1);
     }
 
-    saveFavorites(favorites);
+    favoritesStorage.save(favorites);
 }
 
 function updateFavoriteButtons() {
@@ -81,7 +75,7 @@ function updateFavoriteButtons() {
 function createFavoriteItem(hotel) {
     const item = document.createElement("li");
     item.innerHTML = `
-        <a href="hotel-details.html?id=${hotel.id}">${hotel.name}</a>
+        <a href="${hotel.getDetailsUrl()}">${hotel.name}</a>
         <button class="favorite-remove" type="button" data-id="${hotel.id}"
             aria-label="Remove ${hotel.name} from favorites">✕</button>`;
     return item;
@@ -112,10 +106,7 @@ function renderFavoritesPanel() {
     list.className = "favorites-list";
 
     for (const id of favorites) {
-        const hotel = findHotelById(id);
-        if (hotel) {
-            list.appendChild(createFavoriteItem(hotel));
-        }
+        list.appendChild(createFavoriteItem(findHotelById(id)));
     }
 
     panel.appendChild(list);

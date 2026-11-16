@@ -1,4 +1,3 @@
-//Participant: Miras
 const hotelList = document.getElementById("hotel-list");
 const filterForm = document.getElementById("filter-form");
 const searchInput = document.getElementById("search-input");
@@ -31,14 +30,6 @@ function getCheckedValues(groupName) {
     return values;
 }
 
-function matchesSearch(hotel, query) {
-    if (query === "") {
-        return true;
-    }
-    const searchableText = `${hotel.name} ${hotel.city} ${hotel.country}`.toLowerCase();
-    return searchableText.includes(query.toLowerCase());
-}
-
 function matchesPrice(hotel, ranges) {
     if (ranges.length === 0) {
         return true;
@@ -57,10 +48,6 @@ function matchesRating(hotel, ratings) {
         return true;
     }
     return hotel.stars >= Math.min(...ratings.map(Number));
-}
-
-function matchesAmenities(hotel, selectedAmenities) {
-    return selectedAmenities.every((id) => hotel.amenities.includes(id));
 }
 
 function sortHotels(hotelsToSort, sortMode) {
@@ -111,10 +98,10 @@ function applyFilters() {
     const selectedAmenities = getCheckedValues("amenity");
 
     const filteredHotels = hotels.filter((hotel) => {
-        return matchesSearch(hotel, query) &&
+        return hotel.matchesSearch(query) &&
             matchesPrice(hotel, priceRanges) &&
             matchesRating(hotel, ratings) &&
-            matchesAmenities(hotel, selectedAmenities);
+            selectedAmenities.every((id) => hotel.hasAmenity(id));
     });
 
     const sortedHotels = sortHotels(filteredHotels, sortSelect.value);
