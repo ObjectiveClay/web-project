@@ -13,6 +13,28 @@ class Hotel {
         this.popular = data.popular;
         this.amenities = [...data.amenities];
         this.description = data.description;
+        this.images = data.images ? [...data.images] : Hotel.getDefaultImages(data.id, 3);
+    }
+
+    static getDefaultImages(id, count) {
+        const images = [];
+        for (let i = 1; i <= count; i++) {
+            images.push(`images/hotels/hotel-${id}-${i}.jpg`);
+        }
+        return images;
+    }
+
+    getMainImage() {
+        return this.images[0];
+    }
+
+    createImage(src, className, altText) {
+        const image = document.createElement("img");
+        image.src = src;
+        image.className = className;
+        image.alt = altText;
+        image.loading = "lazy";
+        return image;
     }
 
     getStars() {
@@ -54,7 +76,6 @@ class Hotel {
         if (layout === "row") {
             article.className = "hotel-row";
             article.innerHTML = `
-                <div class="image-placeholder"></div>
                 <div>
                     <h3>${this.name}</h3>
                     <div class="stars">${this.getStars()}</div>
@@ -68,7 +89,6 @@ class Hotel {
         } else {
             article.className = "hotel-card";
             article.innerHTML = `
-                <div class="image-placeholder"></div>
                 <h3>${this.name}</h3>
                 <div class="stars">${this.getStars()}</div>
                 <div class="muted">${this.getLocation()}</div>
@@ -79,6 +99,7 @@ class Hotel {
                 </div>`;
         }
 
+        article.prepend(this.createImage(this.getMainImage(), "card-image", this.name));
         return article;
     }
 }

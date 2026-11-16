@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HotelBook — Sitemap</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="site">
-<header><a class="logo" href="index.html">HotelBook</a><nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav></header>
-<main><h1 class="page-title" style="text-align:center">Website Sitemap</h1>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HotelBook — Sitemap</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="site">
+<header>
+<a class="logo" href="index.html">HotelBook</a>
+<nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="my-bookings.html">My Bookings</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav>
+</header>
+<main>
+<h1 class="page-title" style="text-align:center">Website Sitemap</h1>
 <div class="sitemap">
 <a class="sitemap-node" href="index.html">Home</a>
 <div class="sitemap-children">
 <div class="sitemap-child"><a class="sitemap-node" href="hotels.html">Hotels</a><div class="sitemap-sub"><a class="sitemap-node" href="hotel-details.html">Hotel Details</a><a class="sitemap-node" href="booking.html">Booking</a></div></div>
+<div class="sitemap-child"><a class="sitemap-node" href="my-bookings.html">My Bookings</a></div>
 <div class="sitemap-child"><a class="sitemap-node" href="about.html">About Us</a></div>
 <div class="sitemap-child"><a class="sitemap-node" href="contact.html">Contact</a></div>
 </div>
@@ -16,8 +28,12 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/classes/StorageService.js"></script>
+<script src="js/classes/Hotel.js"></script>
+<script src="js/classes/Booking.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
 <script src="js/effects.js"></script>
-</body></html>
+</body>
+</html>

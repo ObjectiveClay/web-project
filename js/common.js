@@ -85,3 +85,28 @@ function validateForm(form, getError) {
     }
     return isValid;
 }
+// Images
+
+const PLACEHOLDER_IMAGE = "images/placeholder.svg";
+
+function useImagePlaceholder(image) {
+    if (image.src.endsWith(PLACEHOLDER_IMAGE)) {
+        return;
+    }
+    image.classList.add("is-placeholder");
+    image.src = PLACEHOLDER_IMAGE;
+}
+
+document.addEventListener("error", (event) => {
+    if (event.target.tagName === "IMG") {
+        useImagePlaceholder(event.target);
+    }
+}, true);
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("img[src]").forEach((image) => {
+        if (image.complete && image.naturalWidth === 0) {
+            useImagePlaceholder(image);
+        }
+    });
+});

@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HotelBook — Hotels</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="site">
-<header><a class="logo" href="index.html">HotelBook</a><nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav></header>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HotelBook — Hotels</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="site">
+<header>
+<a class="logo" href="index.html">HotelBook</a>
+<nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="my-bookings.html">My Bookings</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav>
+</header>
 <main>
 <div class="page-heading"><h1 class="page-title">Available Hotels</h1><p class="subtitle">Find the best places to stay for your next trip.</p></div>
 <div class="hotels-layout">
@@ -50,9 +59,13 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/classes/StorageService.js"></script>
+<script src="js/classes/Hotel.js"></script>
+<script src="js/classes/Booking.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
 <script src="js/hotels.js"></script>
 <script src="js/effects.js"></script>
-</body></html>
+</body>
+</html>

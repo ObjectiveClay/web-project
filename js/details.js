@@ -1,4 +1,3 @@
-//Participant: Alikhan
 function getCurrentHotel() {
     const id = getQueryParam("id");
     if (id === null) {
@@ -25,19 +24,11 @@ function getHotelReviews(hotel) {
     return hotelReviews;
 }
 
-function getHotelImages(hotel) {
-    const images = [];
-    for (let i = 1; i <= 3; i++) {
-        images.push(`https://picsum.photos/seed/hotelbook-${hotel.id}-${i}/800/500`);
-    }
-    return images;
-}
-
 function renderHotelHeader(hotel) {
     document.title = `HotelBook — ${hotel.name}`;
     document.getElementById("hotel-name").textContent = hotel.name;
     document.getElementById("hotel-rating").textContent =
-        `${getStarString(hotel.stars)} ${hotel.rating} (${hotel.reviewCount} reviews)`;
+        `${hotel.getStars()} ${hotel.rating} (${hotel.reviewCount} reviews)`;
     document.getElementById("hotel-location").textContent = hotel.getLocation();
     document.getElementById("hotel-description").textContent = hotel.description;
     document.getElementById("hotel-price").innerHTML = `$${hotel.price}<small>/night</small>`;
@@ -49,7 +40,6 @@ function renderRooms(hotel) {
     const container = document.getElementById("rooms-list");
 
     for (const room of roomTypes) {
-        const roomPrice = hotel.getNightPrice(room);
         const card = document.createElement("article");
         card.className = "room-card";
         card.innerHTML = `
@@ -57,7 +47,7 @@ function renderRooms(hotel) {
                 <h3>${room.name}</h3>
                 <div class="muted">${room.beds}</div>
             </div>
-            <strong>${formatPrice(roomPrice)}</strong>`;
+            <strong>${formatPrice(hotel.getNightPrice(room))}</strong>`;
         container.appendChild(card);
     }
 }
@@ -92,19 +82,23 @@ function createThumbnail(src, hotel, position) {
     button.className = "gallery-thumb";
     button.dataset.src = src;
     button.setAttribute("aria-label", `Show photo ${position}`);
-    button.innerHTML = `<img src="${src}" alt="${hotel.name}, photo ${position}">`;
+    button.appendChild(hotel.createImage(src, "", `${hotel.name}, photo ${position}`));
     return button;
+}
+
+function showMainImage(src, altText) {
+    const mainImage = document.getElementById("main-image");
+    mainImage.classList.remove("is-placeholder");
+    mainImage.src = src;
+    mainImage.alt = altText;
 }
 
 function renderGallery(hotel) {
     const gallery = document.getElementById("hotel-gallery");
-    const mainImage = document.getElementById("main-image");
-    const images = getHotelImages(hotel);
 
-    mainImage.src = images[0];
-    mainImage.alt = hotel.name;
+    showMainImage(hotel.getMainImage(), hotel.name);
 
-    images.forEach((src, index) => {
+    hotel.images.forEach((src, index) => {
         gallery.appendChild(createThumbnail(src, hotel, index + 1));
     });
 
@@ -117,7 +111,9 @@ function handleGalleryClick(event) {
         return;
     }
 
-    document.getElementById("main-image").src = thumbnail.dataset.src;
+    const hotel = getCurrentHotel();
+    const position = [...thumbnail.parentElement.children].indexOf(thumbnail) + 1;
+    showMainImage(thumbnail.dataset.src, `${hotel.name}, photo ${position}`);
 
     document.querySelectorAll(".gallery-thumb").forEach((button) => {
         button.classList.toggle("active", button === thumbnail);

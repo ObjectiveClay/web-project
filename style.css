@@ -1643,3 +1643,35 @@ textarea.invalid {
         height: 240px;
     }
 }
+.card-image {
+    display: block;
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: var(--bg);
+}
+
+.hotel-row .card-image {
+    height: 80px;
+    margin: 0;
+}
+
+.about-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+img.is-placeholder {
+    object-fit: cover;
+    background: #e9ecef;
+}
+
+[data-theme="dark"] img.is-placeholder {
+    opacity: 0.8;
+}

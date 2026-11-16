@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HotelBook — Contact</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="site">
-<header><a class="logo" href="index.html">HotelBook</a><nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav></header>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HotelBook — Contact</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="site">
+<header>
+<a class="logo" href="index.html">HotelBook</a>
+<nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="my-bookings.html">My Bookings</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav>
+</header>
 <main>
 <section class="hero"><h1>Contact Us</h1><p>We'd love to hear from you.</p></section>
 <div class="contact-layout">
-<form class="form-panel" id="contact-form" novalidate><h3>Send Us a Message</h3>
+<form class="form-panel" id="contact-form" novalidate>
+<h3>Send Us a Message</h3>
 
 <div class="field"><label for="contact-name">Name</label>
 <input id="contact-name" type="text" placeholder="Enter your name" autocomplete="name" aria-describedby="contact-name-error">
@@ -40,7 +51,7 @@
 <h2>Frequently Asked Questions</h2>
 <div class="faq-item">
 <button class="faq-question" type="button" aria-expanded="false">How can I change or cancel my booking?</button>
-<div class="faq-answer"><p>Write to us using the form above or call our support. Please include your name and booking dates.</p></div>
+<div class="faq-answer"><p>Open the My Bookings page. There you can edit the dates or cancel a booking.</p></div>
 </div>
 <div class="faq-item">
 <button class="faq-question" type="button" aria-expanded="false">Is breakfast included in the price?</button>
@@ -60,9 +71,13 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/classes/StorageService.js"></script>
+<script src="js/classes/Hotel.js"></script>
+<script src="js/classes/Booking.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
 <script src="js/contact.js"></script>
 <script src="js/effects.js"></script>
-</body></html>
+</body>
+</html>
