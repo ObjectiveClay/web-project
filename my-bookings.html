@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HotelBook — My Bookings</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="site">
+<header><a class="logo" href="index.html">HotelBook</a><nav><a href="index.html">Home</a><a href="hotels.html">Hotels</a><a href="my-bookings.html">My Bookings</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a class="btn" href="booking.html">Book Now</a></nav></header>
+<main>
+<h1 class="page-title">My Bookings</h1>
+<p class="subtitle">Your saved reservations and travel statistics.</p>
+
+<section class="stats" aria-labelledby="stats-title">
+<h2 class="section-title" id="stats-title">Statistics</h2>
+<div class="stats-grid" id="stats-cards"></div>
+<p class="empty-message hidden" id="stats-empty">You have no bookings yet. <a href="hotels.html">Find a hotel</a> and book it to see your statistics.</p>
+<div class="chart-box" id="chart-box">
+<canvas id="city-chart" role="img" aria-label="Bar chart: total money spent in each city"></canvas>
+</div>
+</section>
+
+<section aria-labelledby="bookings-title">
+<h2 class="section-title" id="bookings-title">Saved bookings</h2>
+<div id="bookings-list"></div>
+</section>
+</main>
+<footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span><a href="sitemap.html">Sitemap</a> | <a href="project-description.html">Project Description</a></span><span>© 2026 HotelBook. All rights reserved.</span></footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="js/classes/StorageService.js"></script>
+<script src="js/classes/Hotel.js"></script>
+<script src="js/classes/Booking.js"></script>
+<script src="js/classes/StatsPanel.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/main.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/my-bookings.js"></script>
+<script src="js/effects.js"></script>
+</body></html>

@@ -38,7 +38,7 @@ function renderHotelHeader(hotel) {
     document.getElementById("hotel-name").textContent = hotel.name;
     document.getElementById("hotel-rating").textContent =
         `${getStarString(hotel.stars)} ${hotel.rating} (${hotel.reviewCount} reviews)`;
-    document.getElementById("hotel-location").textContent = getLocation(hotel);
+    document.getElementById("hotel-location").textContent = hotel.getLocation();
     document.getElementById("hotel-description").textContent = hotel.description;
     document.getElementById("hotel-price").innerHTML = `$${hotel.price}<small>/night</small>`;
     document.getElementById("book-link").href = `booking.html?id=${hotel.id}`;
@@ -49,7 +49,7 @@ function renderRooms(hotel) {
     const container = document.getElementById("rooms-list");
 
     for (const room of roomTypes) {
-        const roomPrice = Math.round(hotel.price * room.priceFactor);
+        const roomPrice = hotel.getNightPrice(room);
         const card = document.createElement("article");
         card.className = "room-card";
         card.innerHTML = `
