@@ -1,3 +1,4 @@
+//Participant: Miras
 const amenities = [
     { id: "wifi", label: "Free Wi-Fi" },
     { id: "breakfast", label: "Breakfast" },
@@ -80,6 +81,7 @@ const hotels = [
     }
 ];
 
+//Participant: Alikhan
 const roomTypes = [
     { name: "Standard Room", beds: "1 queen bed", priceFactor: 1 },
     { name: "Deluxe Room", beds: "1 king bed", priceFactor: 1.4 },

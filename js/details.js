@@ -1,3 +1,4 @@
+//Participant: Alikhan
 function getCurrentHotel() {
     const id = getQueryParam("id");
     if (id === null) {

@@ -1,4 +1,4 @@
-
+//Participant: Abilmansur
 const contactForm = document.getElementById("contact-form");
 const messageInput = document.getElementById("contact-message");
 const messageCounter = document.getElementById("message-counter");

@@ -1,3 +1,4 @@
+//Participant: Miras
 const hotelList = document.getElementById("hotel-list");
 const filterForm = document.getElementById("filter-form");
 const searchInput = document.getElementById("search-input");

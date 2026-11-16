@@ -1,4 +1,4 @@
-
+//Participant: Miras
 function getPopularHotels(limit) {
     const popularHotels = [];
     for (let i = 0; i < hotels.length && popularHotels.length < limit; i++) {
