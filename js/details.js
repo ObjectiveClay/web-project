@@ -1,3 +1,4 @@
+
 function getCurrentHotel() {
     const id = getQueryParam("id");
     if (id === null) {
@@ -88,6 +89,7 @@ function createThumbnail(src, hotel, position) {
 
 function showMainImage(src, altText) {
     const mainImage = document.getElementById("main-image");
+    // Remove the placeholder mark, so a new broken photo is replaced again.
     mainImage.classList.remove("is-placeholder");
     mainImage.src = src;
     mainImage.alt = altText;
@@ -153,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     renderHotelHeader(hotel);
+    addToRecent(hotel.id);
     renderGallery(hotel);
     renderRooms(hotel);
     renderAmenities(hotel);
