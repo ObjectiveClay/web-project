@@ -1,3 +1,4 @@
+
 const amenities = [
     { id: "wifi", label: "Free Wi-Fi" },
     { id: "breakfast", label: "Breakfast" },
@@ -80,12 +81,14 @@ const hotelData = [
     }
 ];
 
+// Room types for the Rooms tab and the booking form.
 const roomTypes = [
     { name: "Standard Room", beds: "1 queen bed", priceFactor: 1 },
     { name: "Deluxe Room", beds: "1 king bed", priceFactor: 1.4 },
     { name: "Family Suite", beds: "2 queen beds", priceFactor: 1.8 }
 ];
 
+// Demo reviews for the Reviews tab.
 const sampleReviews = [
     { author: "Aigerim", stars: 5, text: "Very clean rooms and friendly staff." },
     { author: "Daniyar", stars: 4, text: "Good location, but check-in took a while." },
@@ -95,8 +98,13 @@ const sampleReviews = [
     { author: "Timur", stars: 3, text: "Fine for a short trip, the room was small." }
 ];
 
+// Every hotel becomes a Hotel object with its own methods.
 const hotels = hotelData.map((data) => new Hotel(data));
 
+// One StorageService object per saved value.
 const themeStorage = new StorageService("hotelbook-theme", "light");
 const favoritesStorage = new StorageService("hotelbook-favorites", []);
 const bookingsStorage = new StorageService("hotelbook-bookings", []);
+
+// Recently viewed hotels (Participant 2).
+const recentStorage = new StorageService("hotelbook-recent", []);
