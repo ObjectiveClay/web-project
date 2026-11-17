@@ -33,12 +33,25 @@
 <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="rooms">Rooms</button>
 <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="amenities">Amenities</button>
 <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="reviews">Reviews</button>
+<button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="weather">Weather</button>
 </div>
 
 <div class="tab-panel" id="tab-overview"><h2>About this hotel</h2><p id="hotel-description"></p></div>
 <div class="tab-panel hidden" id="tab-rooms"><h2>Rooms</h2><div id="rooms-list"></div></div>
 <div class="tab-panel hidden" id="tab-amenities"><h2>Amenities</h2><ul id="amenities-list"></ul></div>
 <div class="tab-panel hidden" id="tab-reviews"><h2>Guest reviews</h2><div id="reviews-list"></div></div>
+
+<div class="tab-panel hidden" id="tab-weather">
+<h2>Weather forecast</h2>
+<form class="weather-form" id="weather-form" novalidate>
+<div class="field"><label for="weather-start">From</label><input id="weather-start" type="date"></div>
+<div class="field"><label for="weather-end">To</label><input id="weather-end" type="date"></div>
+<button class="dark" type="submit">Show forecast</button>
+</form>
+<p class="muted">The forecast is available up to 16 days ahead. Data: Open-Meteo.</p>
+<div class="weather-status" id="weather-status" aria-live="polite"></div>
+<div class="weather-grid" id="weather-list"></div>
+</div>
 </div>
 </section>
 
@@ -59,10 +72,13 @@
 <script src="js/classes/StorageService.js"></script>
 <script src="js/classes/Hotel.js"></script>
 <script src="js/classes/Booking.js"></script>
+<script src="js/classes/WeatherService.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
+<script src="js/recent.js"></script>
 <script src="js/details.js"></script>
+<script src="js/weather.js"></script>
 <script src="js/effects.js"></script>
 </body>
 </html>
