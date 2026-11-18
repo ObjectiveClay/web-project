@@ -110,3 +110,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// third member Abilmansur
+function getTodayString() {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${today.getFullYear()}-${month}-${day}`;
+}
+
+function formatDate(value) {
+    if (!value) {
+        return "—";
+    }
+    return Booking.parseDate(value).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    });
+}
