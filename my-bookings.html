@@ -16,6 +16,16 @@
 <h1 class="page-title">My Bookings</h1>
 <p class="subtitle">Your saved reservations and travel statistics.</p>
 
+<section aria-labelledby="bookings-title">
+<div class="section-header">
+<h2 class="section-title" id="bookings-title">Saved bookings</h2>
+<button type="button" class="danger-btn hidden" id="clear-bookings">Clear all</button>
+</div>
+<p class="muted" id="bookings-count"></p>
+<p class="success-message hidden" id="bookings-message" role="status"></p>
+<div class="bookings-list" id="bookings-list"></div>
+</section>
+
 <section class="stats" aria-labelledby="stats-title">
 <h2 class="section-title" id="stats-title">Statistics</h2>
 <div class="stats-grid" id="stats-cards"></div>
@@ -23,11 +33,6 @@
 <div class="chart-box" id="chart-box">
 <canvas id="city-chart" role="img" aria-label="Bar chart: total money spent in each city"></canvas>
 </div>
-</section>
-
-<section aria-labelledby="bookings-title">
-<h2 class="section-title" id="bookings-title">Saved bookings</h2>
-<div id="bookings-list"></div>
 </section>
 </main>
 <footer><strong>HotelBook</strong><span>info@hotelbook.com | +7 700 667 5637</span><span><a href="sitemap.html">Sitemap</a> | <a href="project-description.html">Project Description</a></span><span>© 2026 HotelBook. All rights reserved.</span></footer>
@@ -38,6 +43,7 @@
 <script src="js/classes/StorageService.js"></script>
 <script src="js/classes/Hotel.js"></script>
 <script src="js/classes/Booking.js"></script>
+<script src="js/classes/BookingList.js"></script>
 <script src="js/classes/StatsPanel.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
