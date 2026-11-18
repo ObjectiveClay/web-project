@@ -1,4 +1,7 @@
-//Participant: Abilmansur
+// Booking page: form validation, live price summary and saving the booking.
+// Abilmansur который крутой эщкере
+const bookingList = new BookingList(bookingsStorage);
+
 const bookingForm = document.getElementById("booking-form");
 const hotelSelect = document.getElementById("booking-hotel");
 const roomSelect = document.getElementById("booking-room");
@@ -6,6 +9,8 @@ const checkinInput = document.getElementById("booking-checkin");
 const checkoutInput = document.getElementById("booking-checkout");
 const guestsInput = document.getElementById("booking-guests");
 const bookingSuccess = document.getElementById("booking-success");
+
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 function fillHotelOptions() {
     hotels.forEach((hotel) => {
@@ -25,43 +30,19 @@ function fillRoomOptions() {
     });
 }
 
-function getTodayString() {
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${today.getFullYear()}-${month}-${day}`;
-}
-
-function parseDate(value) {
-    return new Date(`${value}T00:00:00`);
-}
-
-function calculateNights(checkin, checkout) {
-    if (checkin === "" || checkout === "") {
-        return 0;
-    }
-    const millisecondsPerDay = 24 * 60 * 60 * 1000;
-    const nights = Math.round((parseDate(checkout) - parseDate(checkin)) / millisecondsPerDay);
-    return nights > 0 ? nights : 0;
-}
-
-function formatDate(value) {
-    if (value === "") {
-        return "—";
-    }
-    return parseDate(value).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
+// Builds a Booking object from the current form values.
+// An empty room select gives -1, so getRoom() returns null.
+function createBookingFromForm() {
+    return new Booking({
+        hotelId: hotelSelect.value,
+        roomIndex: roomSelect.value === "" ? -1 : roomSelect.value,
+        checkin: checkinInput.value,
+        checkout: checkoutInput.value,
+        guests: guestsInput.value,
+        guestName: document.getElementById("booking-name").value.trim(),
+        email: document.getElementById("booking-email").value.trim(),
+        phone: document.getElementById("booking-phone").value.trim()
     });
-}
-
-function getSelectedRoom() {
-    return roomSelect.value === "" ? null : roomTypes[Number(roomSelect.value)];
-}
-
-function getNightPrice(hotel, room) {
-    return Math.round(hotel.price * room.priceFactor);
 }
 
 function setText(id, text) {
@@ -69,29 +50,24 @@ function setText(id, text) {
 }
 
 function updateSummary() {
-    const hotel = findHotelById(hotelSelect.value);
-    const room = getSelectedRoom();
-    const nights = calculateNights(checkinInput.value, checkoutInput.value);
-    const guests = Number(guestsInput.value);
+    const booking = createBookingFromForm();
+    const hotel = booking.getHotel();
+    const room = booking.getRoom();
+    const nights = booking.getNights();
+    const guests = booking.guests;
 
     setText("summary-hotel", hotel ? hotel.name : "Choose a hotel");
-    setText("summary-stars", hotel ? getStarString(hotel.stars) : "");
+    setText("summary-stars", hotel ? hotel.getStars() : "");
     setText("summary-room", room ? room.name : "—");
-    setText("summary-checkin", formatDate(checkinInput.value));
-    setText("summary-checkout", formatDate(checkoutInput.value));
+    setText("summary-checkin", formatDate(booking.checkin));
+    setText("summary-checkout", formatDate(booking.checkout));
     setText("summary-guests", guests > 0 ? `${guests} ${guests === 1 ? "guest" : "guests"}` : "—");
     setText("summary-nights", nights > 0 ? nights : "—");
-
-    if (hotel && room) {
-        const nightPrice = getNightPrice(hotel, room);
-        setText("summary-price", `$${nightPrice}`);
-        setText("summary-total", nights > 0 ? `Total: $${nightPrice * nights}` : "Total: —");
-    } else {
-        setText("summary-price", "—");
-        setText("summary-total", "Total: —");
-    }
+    setText("summary-price", hotel && room ? `$${booking.getNightPrice()}` : "—");
+    setText("summary-total", hotel && room && nights > 0 ? `Total: $${booking.getTotal()}` : "Total: —");
 }
 
+// Returns the error text for one field, or "" if it is valid.
 function getBookingError(input) {
     const value = input.value.trim();
 
@@ -122,6 +98,7 @@ function getBookingError(input) {
         case "booking-room":
             return value === "" ? "Please choose a room type." : "";
 
+        // Dates in "YYYY-MM-DD" format can be compared as plain strings.
         case "booking-checkin":
             if (value === "") return "Please choose a check-in date.";
             if (value < getTodayString()) return "Check-in cannot be in the past.";
@@ -146,9 +123,10 @@ function getBookingError(input) {
 
 function setDateLimits() {
     checkinInput.min = getTodayString();
-    checkoutInput.min = getTodayString();
+    checkoutInput.min = checkinInput.value || getTodayString();
 }
 
+// The hotel comes from the "Book Now" link: booking.html?id=3
 function prefillHotelFromUrl() {
     const hotelId = getQueryParam("id");
     if (hotelId && findHotelById(hotelId)) {
@@ -156,6 +134,20 @@ function prefillHotelFromUrl() {
     }
 }
 
+// Dates come from the Weather tab: booking.html?id=3&checkin=...&checkout=...
+function prefillDatesFromUrl() {
+    const checkin = getQueryParam("checkin");
+    const checkout = getQueryParam("checkout");
+
+    if (checkin && DATE_PATTERN.test(checkin)) {
+        checkinInput.value = checkin;
+    }
+    if (checkout && DATE_PATTERN.test(checkout)) {
+        checkoutInput.value = checkout;
+    }
+}
+
+// While typing, a field is re-checked only if it already shows an error.
 function handleBookingInput(event) {
     const field = event.target;
 
@@ -164,7 +156,7 @@ function handleBookingInput(event) {
     }
 
     if (field === checkinInput) {
-        checkoutInput.min = checkinInput.value || getTodayString();
+        setDateLimits();
         if (checkoutInput.value !== "") {
             validateField(checkoutInput, getBookingError);
         }
@@ -173,11 +165,27 @@ function handleBookingInput(event) {
     updateSummary();
 }
 
+// When the user leaves a filled field, it is checked right away.
 function handleBookingFieldLeave(event) {
     const field = event.target;
     if (field.closest(".field") && field.value.trim() !== "") {
         validateField(field, getBookingError);
     }
+}
+
+function showBookingResult(message, isError) {
+    bookingSuccess.textContent = message;
+    bookingSuccess.classList.toggle("is-error", isError);
+
+    if (!isError) {
+        const link = document.createElement("a");
+        link.href = "my-bookings.html";
+        link.textContent = "View my bookings →";
+        bookingSuccess.append(" ", link);
+    }
+
+    // jQuery effect: the message fades in so the user notices it.
+    $("#booking-success").removeClass("hidden").hide().fadeIn(400);
 }
 
 function handleBookingSubmit(event) {
@@ -188,29 +196,35 @@ function handleBookingSubmit(event) {
         return;
     }
 
-    const hotel = findHotelById(hotelSelect.value);
-    const room = getSelectedRoom();
-    const nights = calculateNights(checkinInput.value, checkoutInput.value);
-    const total = getNightPrice(hotel, room) * nights;
-    const firstName = document.getElementById("booking-name").value.trim().split(/\s+/)[0];
+    const booking = createBookingFromForm();
 
-    bookingSuccess.textContent =
-        `Thank you, ${firstName}! Your ${room.name} at ${hotel.name} is booked ` +
-        `for ${nights} ${nights === 1 ? "night" : "nights"}. Total: $${total}.`;
+    if (!bookingList.add(booking)) {
+        showBookingResult("Sorry, the booking could not be saved in this browser. Please try again.", true);
+        return;
+    }
 
-    $("#booking-success").removeClass("hidden").hide().fadeIn(400);
+    const hotel = booking.getHotel();
+    const nights = booking.getNights();
+    const firstName = booking.guestName.split(/\s+/)[0];
+
+    showBookingResult(
+        `Thank you, ${firstName}! Your ${booking.getRoom().name} at ${hotel.name} is booked ` +
+        `for ${nights} ${nights === 1 ? "night" : "nights"}. Total: $${booking.getTotal()}.`,
+        false
+    );
 
     bookingForm.reset();
-    setDateLimits();
     prefillHotelFromUrl();
+    setDateLimits();
     updateSummary();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     fillHotelOptions();
     fillRoomOptions();
-    setDateLimits();
     prefillHotelFromUrl();
+    prefillDatesFromUrl();
+    setDateLimits();
     updateSummary();
 
     bookingForm.addEventListener("input", handleBookingInput);
