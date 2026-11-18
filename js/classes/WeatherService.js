@@ -1,15 +1,18 @@
+// Gets the daily forecast from the Open-Meteo API (free, no API key needed).
 class WeatherService {
+    // Open-Meteo gives a forecast for today + 15 days (16 days in total).
     static MAX_DAYS_AHEAD = 15;
 
+    // Weather codes (WMO) from the API, turned into text and an icon.
     static WEATHER_TYPES = [
         { codes: [0], label: "Clear sky", icon: "☀️" },
-        { codes: [1, 2], label: "Partly cloudy", icon: "⛅️" },
+        { codes: [1, 2], label: "Partly cloudy", icon: "⛅" },
         { codes: [3], label: "Overcast", icon: "☁️" },
-        { codes: [45, 48], label: "Fog", icon: "🌫" },
-        { codes: [51, 53, 55, 56, 57], label: "Drizzle", icon: "🌦" },
-        { codes: [61, 63, 65, 66, 67, 80, 81, 82], label: "Rain", icon: "🌧" },
+        { codes: [45, 48], label: "Fog", icon: "🌫️" },
+        { codes: [51, 53, 55, 56, 57], label: "Drizzle", icon: "🌦️" },
+        { codes: [61, 63, 65, 66, 67, 80, 81, 82], label: "Rain", icon: "🌧️" },
         { codes: [71, 73, 75, 77, 85, 86], label: "Snow", icon: "❄️" },
-        { codes: [95, 96, 99], label: "Thunderstorm", icon: "⛈" }
+        { codes: [95, 96, 99], label: "Thunderstorm", icon: "⛈️" }
     ];
 
     constructor(baseUrl = "https://api.open-meteo.com/v1/forecast", timeoutMs = 8000) {
@@ -17,10 +20,11 @@ class WeatherService {
         this.timeoutMs = timeoutMs;
     }
 
+    // Returns a date as "YYYY-MM-DD" in local time.
     static toDateString(date) {
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
-        return ${date.getFullYear()}-${month}-${day};
+        return `${date.getFullYear()}-${month}-${day}`;
     }
 
     static addDays(date, days) {
@@ -35,7 +39,7 @@ class WeatherService {
 
     static getWeatherInfo(code) {
         const type = WeatherService.WEATHER_TYPES.find((item) => item.codes.includes(code));
-        return type  { label: "Unknown", icon: "❔" };
+        return type || { label: "Unknown", icon: "❔" };
     }
 
     buildUrl(lat, lon, startDate, endDate) {
@@ -50,8 +54,9 @@ class WeatherService {
         return `${this.baseUrl}?${params.toString()}`;
     }
 
+    // Turns the API answer into a simple array of day objects.
     static parseDaily(data) {
-        if (!data  !data.daily || !Array.isArray(data.daily.time)) {
+        if (!data || !data.daily || !Array.isArray(data.daily.time)) {
             throw new Error("Unexpected data from the weather service.");
         }
 
@@ -68,6 +73,7 @@ class WeatherService {
     }
 
     async getForecast(lat, lon, startDate, endDate) {
+        // If the server does not answer in time, the request is stopped.
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), this.timeoutMs);
 
@@ -77,7 +83,7 @@ class WeatherService {
             });
 
             if (!response.ok) {
-                throw new Error(Weather server answered with status ${response.status}.);
+                throw new Error(`Weather server answered with status ${response.status}.`);
             }
 
             const data = await response.json();
